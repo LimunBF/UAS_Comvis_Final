@@ -1,0 +1,26 @@
+# Konfigurasi umum
+seed: 42
+device: "cuda"  # atau "cpu"
+
+# Dataset
+dataset:
+  train_labels: "./dataset/combined_train_labels.txt"
+  val_labels: "./dataset/val_labels.txt" # Untuk Early Stopping
+  img_height: 64
+  img_width: 200 # Perlebar sedikit untuk teks yang lebih panjang
+  charset: "0123456789abcdefghijklmnopqrstuvwxyz" # Pastikan ini mencakup semua karakter yang ada di dataset Anda
+
+# Training
+training:
+  epochs: 100 # Diperbanyak untuk memberi kesempatan konvergensi lebih, meskipun ada early stopping
+  batch_size: 32 # Meningkatkan batch size, jika VRAM GPU memungkinkan
+  learning_rate: 0.0003
+  num_workers: 4 # Sesuaikan dengan jumlah core CPU Anda
+  model_save_path: "./models/crnn_model.pt"
+  early_stopping_patience: 10 
+  early_stopping_min_delta: 0.001 
+
+# Inference
+inference:
+  image_folder: "./test_images"
+  result_path: "./outputs/result.txt"
